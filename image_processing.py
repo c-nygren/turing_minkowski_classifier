@@ -1,3 +1,9 @@
+"""
+=== Image Processing Utilities ===
+Functions for converting images to grayscale, blurring image stacks,
+and simulating CCD imaging effects. These are needed to prepare images for the
+Minkowski analysis in analysis_utils.py.
+"""
 
 import cv2
 import numpy as np
