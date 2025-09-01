@@ -1,12 +1,24 @@
 # About
+This project simulates Turing patterns and applies a quantitative analysis 
+(adapted from Mecke 1996) to a final snapshot of the simulation. This allows
+for quantitative classification of patterns and enables statistical comparison
+between our simuolated and Mecke's experimental results.
 
-This project simulates Turing patterns, and then adapts Mecke's Minkowski 
-measure method (for experimental Turing patterns) to a snapshot of the 
-simulated result. This is done to quantitatively categorize the resulting
-pattern. 
+- **Final results & plots:** see the [presentation slides](./final_presentation.pptx)  
+- **Main simulation file:** [`jupy_main.ipynb`](./jupy_main.ipynb), which includes:
+  - simulation routines
+  - plotting and animation
+  - Minkowski analysis
+  - statistical analysis functions
+
+⚠️ **Note:** This codebase was built for academic use and demonstration.  
+It has not been cleaned up for third-party use and requires adaptation.
+
+## Acknowledgements
+This project was originally developed together with [@collaborator-username](https://github.com/SophiaaW).
 
 
-# Original Class Project Description
+## Original Class Project Description
 For the final project of Computational Physics we encourage you to define your
 own project!
 
