@@ -1,5 +1,12 @@
-# Project 3
+# About
 
+This project simulates Turing patterns, and then adapts Mecke's Minkowski 
+measure method (for experimental Turing patterns) to a snapshot of the 
+simulated result. This is done to quantitatively categorize the resulting
+pattern. 
+
+
+# Original Class Project Description
 For the final project of Computational Physics we encourage you to define your
 own project!
 
