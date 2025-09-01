@@ -12,8 +12,8 @@ between our simuolated and Mecke's experimental results.
   - Minkowski analysis
   - statistical analysis (for comparison with literature)
 
-⚠️ **Note:** This codebase was built for academic use and demonstration.  
-It has not been cleaned up for third-party use and requires adaptation.
+⚠️ **Note:** This codebase was built for academic use and demonstration. All results are presented neatly
+in the final presentation. The code has not been cleaned up for third-party use and requires adaptation.
 
 ## Acknowledgements
 This project was originally developed together with [@collaborator-username](https://github.com/SophiaaW).
