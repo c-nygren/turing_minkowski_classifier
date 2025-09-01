@@ -1,4 +1,5 @@
-# About
+# Simulated Turing pattern Minkowski classifier
+## About
 This project simulates Turing patterns and applies a quantitative analysis 
 (adapted from Mecke 1996) to a final snapshot of the simulation. This allows
 for quantitative classification of patterns and enables statistical comparison
