@@ -1,3 +1,11 @@
+"""
+=== Polynomial Fit Analysis ===
+Statistical comparison of polynomial fits to Minkowski functional curves from 
+two different datasets (e.g. dots vs stripes) against each other and against 
+Mecke’s published fits.
+
+"""
+
 
 from __future__ import annotations
 
@@ -11,10 +19,10 @@ from pathlib import Path
 from typing import Literal, Tuple
 
 # ───────────────── CONFIG ────────────────────────────────
-USE_NORMALISED: bool = True          # flip to True for scale‑free metrics
+USE_NORMALISED: bool = True          # True normalises RMS by choice below
 NORMALISE_RMS_MODE: Literal["none", "range", "stdev"] = "range"  # ignored if USE_NORMALISED=False
 RELATIVE_EUCLIDEAN: bool = True      # True ⇒ ||Δ|| / ||ref||
-EPS: float = 1e-12                    # tolerance for safe division
+EPS: float = 1e-12                   # tolerance for safe division
 # ─────────────────────────────────────────────────────────
 
 # ─── 1)  Mecke’s published coefficients (descending degree) ─────
@@ -60,8 +68,8 @@ def _curve_span(vals: np.ndarray, mode: str):
         return np.std(vals)
     raise ValueError("mode must be 'range' or 'stdev'")
 
-def compute_rms(coeffs1: np.ndarray, coeffs2: np.ndarray, *, rmin: float = -1.0, rmax: float = 1.0,
-                num: int = 200, normalise: str = "none"):
+def compute_rms(coeffs1: np.ndarray, coeffs2: np.ndarray, *, rmin: float = -1.0, 
+                rmax: float = 1.0, num: int = 200, normalise: str = "none"):
     r = np.linspace(rmin, rmax, num)
     y1, y2 = np.polyval(coeffs1, r), np.polyval(coeffs2, r)
     rms_raw = np.sqrt(np.mean((y1 - y2) ** 2))
@@ -72,8 +80,8 @@ def compute_rms(coeffs1: np.ndarray, coeffs2: np.ndarray, *, rmin: float = -1.0,
 
 # ─── 5)  Orientation agreement (sign & Pearson corr) ─────────────
 
-def orientation_agreement(coeffs_dots, coeffs_stripes, mecke_dots, mecke_stripes,
-                          *, rmin=-1.0, rmax=1.0, num=500):
+def orientation_agreement(coeffs_dots, coeffs_stripes, mecke_dots, mecke_stripes
+                          , *, rmin=-1.0, rmax=1.0, num=500):
     r = np.linspace(rmin, rmax, num)
     ours_diff   = np.polyval(coeffs_dots, r) - np.polyval(coeffs_stripes, r)
     mecke_diff  = np.polyval(mecke_dots,  r) - np.polyval(mecke_stripes,  r)
@@ -111,7 +119,8 @@ def analysis():
         dist_s = euclidean_distance(stripes[name], ref_s)
         dist_ds = euclidean_distance(dots[name], stripes[name])
         label = "rel" if RELATIVE_EUCLIDEAN else "abs"
-        print(f"{name}: {label} dist   dots→Mecke = {dist_d:.4f} | stripes→Mecke = {dist_s:.4f} | dots→stripes = {dist_ds:.4f}")
+        print(f"{name}: {label} dist   dots→Mecke = {dist_d:.4f} |\
+               stripes→Mecke = {dist_s:.4f} | dots→stripes = {dist_ds:.4f}")
 
     print("\n=== RMS differences of entire curves [r ∈ –1..+1] ===")
     for name, ref_d, ref_s in [
@@ -122,8 +131,10 @@ def analysis():
         rms_d = compute_rms(dots[name], ref_d, normalise=rms_mode)
         rms_s = compute_rms(stripes[name], ref_s, normalise=rms_mode)
         rms_ds = compute_rms(dots[name], stripes[name], normalise=rms_mode)
-        tag = {"none": "raw", "range": "norm‑rng", "stdev": "norm‑std"}[rms_mode]
-        print(f"{name}: {tag} RMS  dots→Mecke = {rms_d:.4f} | stripes→Mecke = {rms_s:.4f} | dots→stripes = {rms_ds:.4f}")
+        tag = {"none": "raw", "range": "norm‑rng", "stdev": "norm‑std"}
+        [rms_mode]
+        print(f"{name}: {tag} RMS  dots→Mecke = {rms_d:.4f} | stripes→Mecke =\
+               {rms_s:.4f} | dots→stripes = {rms_ds:.4f}")
 
     # Orientation agreement
     print("\n=== Orientation agreement (dots vs stripes w.r.t. Mecke) ===")
@@ -132,7 +143,8 @@ def analysis():
         ("ps", MECKE_PS_DOTS, MECKE_PS_STRIPES),
         ("pchi", MECKE_PCHI_DOTS, MECKE_PCHI_STRIPES),
     ]:
-        frac, corr = orientation_agreement(dots[name], stripes[name], ref_d, ref_s)
+        frac, corr = orientation_agreement(dots[name], stripes[name], 
+                                           ref_d, ref_s)
         print(f"{name}: frac_same_sign = {frac:.3f}, corr_coef = {corr:.3f}")
 
     # Mecke intrinsic comparison

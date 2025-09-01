@@ -1,3 +1,9 @@
+"""
+=== Pipeline Helpers for Dots vs Stripes Analysis ===
+Common routines for configuring, running, and plotting the dots-vs-stripes
+pipelines. 
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -9,6 +15,7 @@ import seaborn as sns
 import re
 import os
 from dataclasses import replace
+
 
 def config_dots_stripes(analysis_params):
     if analysis_params.blur_type.lower() not in ("gaussian", "median", "mecke"):
@@ -23,7 +30,6 @@ def config_dots_stripes(analysis_params):
     elif analysis_params.blur_type.lower() == "median":
         folder_name = f"k{analysis_params.ksize}"    
 
-
     dots_cfg = replace(
         analysis_params,
         input_stack = r"data/stats/dots/sigma0/images_stack_20runs_June4.npz",
@@ -37,7 +43,6 @@ def config_dots_stripes(analysis_params):
     )
 
     return dots_cfg, stripes_cfg
-
 
 
 
@@ -76,7 +81,7 @@ def load_as_list(input_file):
 
 def analyse_curves_once(stack_npz, *, levels=256):
     """
-    Convenience: given a processed (blurred) stack, run just the parts of the
+    Given a processed (blurred) stack, run just the parts of the
     pipeline that create *_stats.npz and return its path.
     """
     tmp_dir = Path(stack_npz).parent
@@ -120,20 +125,40 @@ def collect_pipeline_paths(pipeline_dir: str) -> dict:
 def run_pipeline(input_stack,
                  folder_name : str,
                  *,
-                 blur_type="gaussian",
-                 sigma=1,
-                 ksize=3,
-                 fwhm_px=2.5,  # for "mecke" blur
-                 gamma=0.6,    # for "mecke" blur
-                 levels=256,
+                 blur_type : str="gaussian",
+                 sigma : float=1, # for "gaussian" blur
+                 ksize : int=3, # for "median" blur
+                 fwhm_px : float=2.5,  # for "mecke" blur
+                 gamma : float=0.6,    # for "mecke" blur
+                 levels : int =256,
                  outroot="data/stats/",
                  tag=None):
     """
+    Input stack can be a single image or a stack of images, in .npy or .npz 
+    format.
+
+    This function runs the full pipeline on a given input stack:
     (1) blur the stack   →  blurred_{tag}.npz
     (2) threshold curves →  curves_{tag}.npz v, s, chi for each run
     (3) stats            →  curves_{tag}_stats.npz
     (4) polynomial fits  →  curves_{tag}_fit.npz
     Returns a dict with all four paths.
+
+    MEDIAN BLUR:
+    -----------
+    Median blur takes an odd integer kernel size (ksize) ≥ 3 and a median filter
+    is applied to each image. It replaces each pixel with the median value
+    within the ksize×ksize square neighbourhood centered on that pixel. This
+    ensures that output pixel is an existing value, and can reduce noise. In 
+    this case, results thus far are less effective than Gaussian blur.
+
+
+    MECKE BLUR:
+    -----------
+    Mecke blur parameters (fwhm_px, gamma) are an experimental addition. This
+    allows for tuning blur using full width at half maximum (FWHM) in pixels,
+    and gamma controls the shape of the kernel (0.5 < gamma < 1.0). Results 
+    thus far are poorer than a simple Gaussian blur.
     """
     outroot = Path(outroot) / folder_name
     outroot.mkdir(parents=True, exist_ok=True)
@@ -144,7 +169,8 @@ def run_pipeline(input_stack,
     elif blur_type.lower() == "median":
         blur_tag = f"k{ksize}"          # e.g. ksize=3 → “k3”
     elif blur_type.lower() == "mecke":
-        blur_tag = f"f{fwhm_px}_g{gamma}"  # e.g. fwhm_px=2.5, gamma=0.6 → “f2.50_g0.60”}"
+        blur_tag = f"f{fwhm_px}_g{gamma}"  
+        # e.g. fwhm_px=2.5, gamma=0.6 → “f2.50_g0.60”}"
 
     else: # unknown blur type
         raise ValueError("blur_type must be 'gaussian', 'median' or 'mecke'")
@@ -179,71 +205,6 @@ def run_pipeline(input_stack,
                 fits  =fit_npz)
 
 
-# def run_dots_vs_stripes_plots(dots_results, #dict or path to finished folder
-#                               stripes_results, 
-#                               *,
-#                               n_points: int = 100,
-#                               subdir: str = "comparison_plots"):
-#     """
-#     Build all dots-vs-stripes PNGs and place them in
-#         <common_parent>/<subdir>/
-#     """
-
-#     # --- Decide where to save the PNGs ---------------------------------
-#     # Accept either dicts (from run_pipeline) OR paths (to finished folders)
-#     if not isinstance(dots_results, dict):
-#         dots_results = collect_pipeline_paths(dots_results)
-#     if not isinstance(stripes_results, dict):
-#         stripes_results = collect_pipeline_paths(stripes_results)
-
-    
-#     # ---------- FIND A COMMON ANCESTOR DIRECTORY -----------------------
-#     dots_dir    = Path(dots_results["stats"]).parent
-#     stripes_dir = Path(stripes_results["stats"]).parent
-
-#     try:
-#         common_parent = Path(os.path.commonpath([dots_dir, stripes_dir]))
-#     except ValueError:           # e.g. on different drives (Windows)
-#         raise ValueError("Dots and stripes pipelines are on different drives")
-
-#     if common_parent == Path("/"):
-#         raise ValueError("No meaningful common parent – paths unrelated")
-
-#     # --- Experiment tag ---
-#     if dots_dir.name == stripes_dir.name:
-#         exp_tag = dots_dir.name           # e.g.  "sigma0"
-#     else:
-#         # If someone compares different sigmas, keep both tags.
-#         exp_tag = f"{dots_dir.name}_vs_{stripes_dir.name}"
-
-
-#     plot_dir = common_parent / f"{subdir}_{exp_tag}"
-#     plot_dir.mkdir(parents=True, exist_ok=True)
-
-#     # --- Common colours ------------------------------------------------
-#     red   = sns.color_palette("Set1", 4)[3]
-#     green = sns.color_palette("Set1", 4)[2]
-
-#     dots_stats,    dots_fit    = dots_results["stats"],    dots_results["fits"]
-#     stripes_stats, stripes_fit = stripes_results["stats"], stripes_results["fits"]
-
-#     # 1) raw v, s, χ plots ---------------------------------------------
-#     for metric in ("v", "s", "chi"):
-#         png = plot_dir / f"raw_{metric}.png"
-#         save_raw_data_plots(n_points, metric, png,
-#                             dots_stats, dots_fit,
-#                             stripes_stats, stripes_fit,
-#                             lcol1=red, lcol2=green)
-
-#     # 2) pv, ps, pχ + Mecke comparison ---------------------------------
-#     for func in ("pv", "ps", "pchi"):
-#         png = plot_dir / f"{func}_mecke.png"
-#         plot_ds_vs_mecke(func, png,
-#                          dots_stats, dots_fit,
-#                          stripes_stats, stripes_fit, n_points=n_points)
-
-#     print(f"✔ comparison plots → {plot_dir}")
-
     
 def run_dots_vs_stripes_plots(dots_results,        # dict or path – MAY be None
                               stripes_results=None,# ← DEFAULT None
@@ -251,7 +212,7 @@ def run_dots_vs_stripes_plots(dots_results,        # dict or path – MAY be Non
                               n_points: int = 100,
                               subdir: str = "comparison_plots"):
     """
-    Build PNGs from one or two pipelines.
+    Build plot PNGs from one or two pipelines.
 
     * If **both** are provided → dots-vs-stripes comparison plots.
     * If **only one** is provided → plots for that dataset alone.
