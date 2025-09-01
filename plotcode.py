@@ -2,6 +2,7 @@
 === Plotting Code ===
 This module contains functions for plotting results from the simulation.
 """
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap

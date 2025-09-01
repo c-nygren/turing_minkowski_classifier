@@ -3,6 +3,7 @@
 This module contains functions for simulating a reaction-diffusion system using
 the Gray-Scott model. 
 """
+
 from dataclasses import dataclass
 import numpy as np
 import analysis_utils as au

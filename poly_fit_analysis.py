@@ -3,9 +3,7 @@
 Statistical comparison of polynomial fits to Minkowski functional curves from 
 two different datasets (e.g. dots vs stripes) against each other and against 
 Mecke’s published fits.
-
 """
-
 
 from __future__ import annotations
 

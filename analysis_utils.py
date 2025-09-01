@@ -1,8 +1,9 @@
 """
 === Analysis Utilities ===
 This module contains functions for calculating errors, saving run data in data
-folder and performing quantitative analysis.
+folder and performing the Minkowski analysis on image stacks.
 """
+
 from datetime import datetime
 import numpy as np
 from pathlib import Path
