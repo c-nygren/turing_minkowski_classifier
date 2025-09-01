@@ -5,7 +5,7 @@ This project simulates Turing patterns and applies a quantitative analysis
 for quantitative classification of patterns and enables statistical comparison
 between our simuolated and Mecke's experimental results.
 
-- **All final results, analysis & plots:** see the [presentation slides](./Turing_presentation_final.pptx)  
+- **All final results, analysis & plots:** see the [presentation slides](./Turing_presentation_final.pdf) (or the [ppt file](./Turing_presentation_final.pptx) to see animations )  
 - **Main simulation file:** [`jupy_main.ipynb`](./jupy_main.ipynb), from where you can run:
   - simulation routines
   - plotting and animation
