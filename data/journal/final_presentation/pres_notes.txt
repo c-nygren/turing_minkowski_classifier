@@ -1,0 +1,21 @@
+Plots:
+
+- Make parameter for line color - use the seaboard colorpallete
+- Make label for legend - dots/stripes (for both mean and error) - maybe this should show on the graph? 
+
+Analysis:
+- Quantitative way to compare polynomial curves - the coefficients don’t match
+
+ERROR IN CURVE FIT!!
+
+must mention performance
+
+THEORETICAL BACKGROUND:
+- can help to have sketches explaining what the method is, the model (hard to understand equations)
+- can simplify things in theoretical background
+
+- Everyone needs to be able to answer questions
+
+Sophia:
+- Theory and animations
+- Minkowski metric

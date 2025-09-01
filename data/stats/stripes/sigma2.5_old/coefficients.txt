@@ -1,0 +1,37 @@
+
+=== Fit Summary ===
+
+  p_v  : rmin = None   rmax = None
+  p_s  : rmin = None   rmax = None
+  p_chi: rmin = None rmax = None
+
+(these are in reverse order)
+Polynomial degrees:
+  p_v  degree = 3
+  p_s  degree = 4
+  p_chi degree = 3
+
+p_v coefficients and 1σ uncertainties:
+  c_0  = -2.470413e+00  ±  3.890900e-02
+  c_1  = -7.488619e-02  ±  2.092777e-02
+  c_2  = -9.923408e-01  ±  2.754798e-02
+  c_3  =  1.599093e-01  ±  6.930837e-03
+
+----------------------------------------
+
+p_s coefficients and 1σ uncertainties:
+  c_0  = -3.283171e-01  ±  4.691685e-02
+  c_1  =  3.183418e-01  ±  2.866580e-02
+  c_2  =  8.049839e-01  ±  2.508825e-02
+  c_3  = -2.215596e-01  ±  7.462148e-03
+  c_4  =  7.715031e-01  ±  1.849765e-03
+
+----------------------------------------
+
+p_chi coefficients and 1σ uncertainties:
+  c_0  =  4.656796e-02  ±  1.514273e-03
+  c_1  = -4.741661e-02  ±  7.587678e-04
+  c_2  =  1.290337e-02  ±  4.861989e-04
+  c_3  =  1.065887e-03  ±  8.346433e-05
+
+=== End of Summary ===

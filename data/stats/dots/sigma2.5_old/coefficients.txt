@@ -1,0 +1,79 @@
+
+=== Fit Summary ===
+data\stats\dots\curves_20runs_May31_transform_fit_WITHCUTOFF.npz
+
+Raw threshold ranges (if None, used full):
+  p_v  : rmin = 1             rmax = 240
+  p_s  : rmin = 40             rmax = 240
+  p_chi: rmin = 35           rmax = 240
+
+Polynomial degrees:
+  p_v  degree = 3
+  p_s  degree = 4
+  p_chi degree = 3
+
+p_v coefficients and 1σ uncertainties:
+  c_0  = -2.095168e+00  ±  4.882379e-02
+  c_1  =  4.768494e-01  ±  2.630643e-02
+  c_2  = -8.145648e-01  ±  1.702655e-02
+  c_3  = -5.030287e-01  ±  4.216617e-03
+
+----------------------------------------
+
+p_s coefficients and 1σ uncertainties:
+  c_0  =  8.530772e-01  ±  3.699605e-02
+  c_1  =  3.614244e-02  ±  1.435958e-02
+  c_2  =  4.937146e-01  ±  1.196679e-02
+  c_3  =  1.179874e-01  ±  2.885040e-03
+  c_4  =  7.520475e-01  ±  5.269396e-04
+
+----------------------------------------
+
+p_chi coefficients and 1σ uncertainties:
+  c_0  =  8.468515e-02  ±  3.413751e-03
+  c_1  = -2.187636e-03  ±  1.303808e-03
+  c_2  =  1.441651e-02  ±  5.968013e-04
+  c_3  =  2.552613e-02  ±  1.042613e-04
+
+=== End of Summary ===
+
+
+
+
+=== Fit Summary ===
+data\stats\dots\curves_20runs_May31_transform_fit_min40_max192.npz
+
+Raw threshold ranges (if None, used full):
+  p_v  : rmin = 40             rmax = 192
+  p_s  : rmin = 40             rmax = 192
+  p_chi: rmin = 40           rmax = 192
+
+Polynomial degrees:
+  p_v  degree = 3
+  p_s  degree = 4
+  p_chi degree = 3
+
+p_v coefficients and 1σ uncertainties:
+  c_0  = -1.379824e+00  ±  4.010047e-02
+  c_1  =  2.043123e-01  ±  1.462545e-02
+  c_2  = -9.692836e-01  ±  7.284129e-03
+  c_3  = -4.873685e-01  ±  1.423377e-03
+
+----------------------------------------
+
+p_s coefficients and 1σ uncertainties:
+  c_0  =  4.220042e-01  ±  3.052884e-02
+  c_1  = -1.308112e-01  ±  1.353636e-02
+  c_2  =  5.673556e-01  ±  6.746790e-03
+  c_3  =  1.372540e-01  ±  1.803451e-03
+  c_4  =  7.514133e-01  ±  2.575348e-04
+
+----------------------------------------
+
+p_chi coefficients and 1σ uncertainties:
+  c_0  =  9.270063e-02  ±  4.946587e-03
+  c_1  =  3.188367e-03  ±  1.593282e-03
+  c_2  =  1.408286e-02  ±  6.564857e-04
+  c_3  =  2.533520e-02  ±  1.100037e-04
+
+=== End of Summary ===

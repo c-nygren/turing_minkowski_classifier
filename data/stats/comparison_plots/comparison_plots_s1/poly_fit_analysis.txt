@@ -1,0 +1,21 @@
+=== Euclidean distances (coefficients) ===
+pv: rel dist   dots→Mecke = 0.5233 | stripes→Mecke = 0.5253 | dots→stripes = 0.5066
+pv: rel dist   dots→Mecke = 0.5233 | stripes→Mecke = 0.5253 | dots→stripes = 0.5066
+ps: rel dist   dots→Mecke = 0.6663 | stripes→Mecke = 1.5192 | dots→stripes = 0.3257
+pchi: rel dist   dots→Mecke = 0.7870 | stripes→Mecke = 0.9106 | dots→stripes = 0.9359
+
+=== RMS differences of entire curves [r ∈ –1..+1] ===
+pv: norm‑rng RMS  dots→Mecke = 0.1183 | stripes→Mecke = 0.0843 | dots→stripes = 0.1810
+ps: norm‑rng RMS  dots→Mecke = 0.1313 | stripes→Mecke = 0.7204 | dots→stripes = 0.1238
+pchi: norm‑rng RMS  dots→Mecke = 0.1763 | stripes→Mecke = 0.1371 | dots→stripes = 0.4989
+
+=== Orientation agreement (dots vs stripes w.r.t. Mecke) ===
+pv: frac_same_sign = 1.000, corr_coef = -0.510
+ps: frac_same_sign = 0.278, corr_coef = -0.390
+pchi: frac_same_sign = 0.764, corr_coef = 0.151
+
+=== Mecke’s intrinsic (dots vs stripes) ===
+pv: frac_same_sign = 1.000, corr_coef = 1.000
+ps: frac_same_sign = 1.000, corr_coef = 1.000
+pchi: frac_same_sign = 1.000, corr_coef = 1.000
+PS C:\Users\nygre\Git\computational_physics\Project3_cnygren_sawellman>
