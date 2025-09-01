@@ -6,11 +6,11 @@ for quantitative classification of patterns and enables statistical comparison
 between our simuolated and Mecke's experimental results.
 
 - **All final results, analysis & plots:** see the [presentation slides](./Turing_presentation_final.pptx)  
-- **Main simulation file:** [`jupy_main.ipynb`](./jupy_main.ipynb), which includes:
+- **Main simulation file:** [`jupy_main.ipynb`](./jupy_main.ipynb), from where you can run:
   - simulation routines
   - plotting and animation
   - Minkowski analysis
-  - statistical analysis functions
+  - statistical analysis (for comparison with literature)
 
 ⚠️ **Note:** This codebase was built for academic use and demonstration.  
 It has not been cleaned up for third-party use and requires adaptation.
